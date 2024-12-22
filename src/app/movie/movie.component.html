@@ -1,0 +1,39 @@
+@defer(on timer(1ms)) {
+<div class="movie-container" [class.shifted]="active()">
+  <div>
+    <div>
+      <img
+        [src]="'http://image.tmdb.org/t/p/w500/' + movieDetails().poster_path"
+        alt=""
+        width="300px"
+      />
+    </div>
+    <div class="details">
+      <h1>{{ movieDetails().title || movieDetails().name }}</h1>
+      @for(details of detailsObj(); track details.key) { @if(details.value) {
+      <div class="characteristic">
+        <b>{{ details.key }} </b>
+        @if(details.key === 'IMDB: ' || details.key === 'Website: ') {
+        <a [href]="details.link" target="_blank">{{ details.value }}</a>
+        } @else {
+        <span>{{ details.value }}</span>
+        }
+      </div>
+      } }
+      <button class="favorite-btn" (click)="addToFavorites()">
+        ADD TO FAVORITES
+      </button>
+    </div>
+  </div>
+  <p>
+    {{ movieDetails().overview || "This movie has no overview." }}
+  </p>
+  <div class="fav_notify" [class.notif_hidden]="favNotificationHidden()">
+    <i class="fa-regular fa-circle-check"></i>
+    <p>Added to favorites.</p>
+    <button (click)="closeNotification()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+</div>
+}

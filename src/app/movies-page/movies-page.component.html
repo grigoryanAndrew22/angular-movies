@@ -1,0 +1,8 @@
+@if(tabType === 'movies') {
+<app-movies tabType="top_rated" moviesType="movies" top="75px"></app-movies>
+<app-movies tabType="popular" moviesType="movies" top="365px"></app-movies>
+<app-movies tabType="upcoming" moviesType="movies" top="655px"></app-movies>
+} @else {
+<app-movies tabType="top_rated" moviesType="tv" top="75px"></app-movies>
+<app-movies tabType="popular" moviesType="tv" top="365px"></app-movies>
+}

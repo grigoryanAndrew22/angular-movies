@@ -1,0 +1,88 @@
+@defer(on timer(1ms)) {
+<div class="all-movies-container" [class.shifted]="active()">
+  <div class="heading">
+    <h1>{{ title() }}</h1>
+  </div>
+  <div class="movies">
+    @for(movie of moviesArr(); track movie.id) {
+    <div class="movie-card-wrapper">
+      <a class="movie-card" [routerLink]="['/', routerLinkPart(), movie.id]">
+        <img
+          [src]="'http://image.tmdb.org/t/p/w500/' + movie.poster_path"
+          alt="poster"
+          width="180"
+          height="250"
+        />
+      </a>
+      @if(showStar()) {
+      <button class="remove_favorite" (click)="removeFavorite(movie.id)">
+        <i class="fa-solid fa-star"></i>
+      </button>
+      }
+    </div>
+    }
+  </div>
+
+  <div class="pagination">
+    <button
+      (click)="onPageChange(selectedPage() - 1)"
+      [class.disabled_arrow]="selectedPage() === 1"
+    >
+      <i class="fa-solid fa-angle-left"></i>
+    </button>
+    <button (click)="onPageChange(1)" [class.disabled]="1 === selectedPage()">
+      1
+    </button>
+    @if(totalPages() > 1) { @if(selectedPage() < 5) { @for(page of firstNPages;
+    track page) {
+    <button
+      [class]="'page-' + page"
+      (click)="onPageChange(page)"
+      [class.disabled]="page === selectedPage()"
+    >
+      {{ page }}
+    </button>
+    }
+    <span>...</span>
+    } @if(selectedPage() >= 5 && selectedPage() < (totalPages() - 3)) {
+    <span>...</span>
+    @for(page of nextPages(); track page) {
+    <button
+      [class]="'page-' + page"
+      (click)="onPageChange(page)"
+      [class.disabled]="page === selectedPage()"
+    >
+      {{ page }}
+    </button>
+    }
+    <span>...</span>
+    } @if(selectedPage() > (totalPages() - 4)) {
+    <span>...</span>
+    @for(page of lastNPages(); track page) {
+    <button
+      [class]="'page-' + page"
+      (click)="onPageChange(page)"
+      [class.disabled]="page === selectedPage()"
+    >
+      {{ page }}
+    </button>
+    } }
+
+    <button
+      (click)="onPageChange(totalPages())"
+      [class.disabled]="totalPages() === selectedPage()"
+    >
+      {{ totalPages() }}
+    </button>
+    }
+    <button
+      (click)="onPageChange(selectedPage() + 1)"
+      [class.disabled_arrow]="
+        selectedPage() === totalPages() || totalPages() <= 1
+      "
+    >
+      <i class="fa-solid fa-angle-right"></i>
+    </button>
+  </div>
+</div>
+}

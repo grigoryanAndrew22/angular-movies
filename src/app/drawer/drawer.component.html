@@ -1,0 +1,26 @@
+<div class="drawer" [class.drawer_hidden]="!active()">
+  <div class="user">
+    <i class="fa-solid fa-user"></i>
+    <button (click)="switch()" [class.hidden]="!active()">
+      <i class="fa-solid fa-angle-left"></i>
+    </button>
+  </div>
+  <div class="tabs">
+    <ul>
+      @for(tab of tabs; track tab.title) {
+      <a [routerLink]="tab.link">
+        <li>
+          <i [class]="'fa-solid ' + tab.iconClass"></i>
+          <span [class.hidden]="!active()">{{ tab.title }}</span>
+        </li>
+      </a>
+      }
+      <a routerLink="/" class="logout">
+        <li>
+          <i class="fa-solid fa-arrow-right-from-bracket red"></i>
+          <span [class.hidden]="!active()">Log out</span>
+        </li>
+      </a>
+    </ul>
+  </div>
+</div>

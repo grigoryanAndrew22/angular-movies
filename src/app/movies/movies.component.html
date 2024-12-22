@@ -1,0 +1,27 @@
+<div
+  class="movies-container"
+  [class.shifted]="active()"
+  [style]="{ top: top() + '!important' }"
+>
+  <div class="heading">
+    <h1>
+      {{ title }}
+    </h1>
+    <a [routerLink]="routerlink">SHOW ALL</a>
+  </div>
+  <div class="movies">
+    @for(movie of fetchedMovies(); track movie.id) {
+    <a
+      class="movie-card"
+      [routerLink]="['/', moviesType() === 'tv' ? 'tv' : 'movie', movie.id]"
+    >
+      <img
+        [src]="'http://image.tmdb.org/t/p/w500/' + movie.poster_path"
+        alt=""
+        width="140"
+        height="210"
+      />
+    </a>
+    }
+  </div>
+</div>

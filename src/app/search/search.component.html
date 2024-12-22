@@ -1,0 +1,21 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()">
+  <div class="search" [class.shifted]="active()">
+    <fieldset class="search-select">
+      <legend>
+        <span>Movie type</span>
+      </legend>
+      <select name="MovieType" id="movie_type" formControlName="movieType">
+        <option value="movie">Movie</option>
+        <option value="tv">TV</option>
+      </select>
+    </fieldset>
+    <fieldset class="search-input">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search..." formControlName="query" />
+    </fieldset>
+    <div class="buttons">
+      <button class="search-btn" type="submit">SEARCH</button>
+      <button class="clear-btn" (click)="clear()">CLEAR</button>
+    </div>
+  </div>
+</form>
