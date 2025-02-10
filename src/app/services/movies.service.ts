@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 
-Injectable({
+@Injectable({
   providedIn: 'root',
-});
+})
 export class MoviesService {
   private httpClient = inject(HttpClient);
 
